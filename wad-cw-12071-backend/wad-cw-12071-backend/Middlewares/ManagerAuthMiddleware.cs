@@ -14,7 +14,7 @@ namespace wad_cw_12071_backend.Middlewares
 
         public async Task InvokeAsync( HttpContext context, RequestDelegate next )
         {
-            var sessionId = context.Request.Cookies[ "sessionId" ];
+            var sessionId = context.Request.Headers[ "X-Auth-Token" ].ToString();
 
             if ( sessionId == null )
             {

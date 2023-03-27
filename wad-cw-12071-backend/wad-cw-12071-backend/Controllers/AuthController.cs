@@ -11,12 +11,6 @@ namespace wad_cw_12071_backend.Controllers
     {
         private readonly AuthService _authService;
 
-        private readonly CookieOptions _cookieOptions = new()
-        {
-            Secure = false,
-            HttpOnly = true,
-        };
-
         public AuthController( AuthService authService )
         {
             _authService = authService;
@@ -32,36 +26,43 @@ namespace wad_cw_12071_backend.Controllers
             return BadRequest("Login is taken");
         }
 
-        [HttpPost("login/employee")]
-        public IActionResult LoginEmployee( [FromBody] LoginDto loginDto )
+        [HttpPost("login")]
+        public IActionResult Login( [FromBody] LoginRequestDto loginRequestDto )
         {
-            var employeeSession = _authService.LoginEmployee(loginDto);
+            if ( loginRequestDto.IsManager )
+            {
+                var managerSession = _authService.LoginManager(loginRequestDto);
 
-            if ( employeeSession == null ) return BadRequest();
+                if ( managerSession == null ) return BadRequest();
 
-            Response.Cookies.Append("sessionId", employeeSession.SessionId, _cookieOptions);
+                var loginResponse = new LoginResponseDto()
+                {
+                    SessionId = managerSession.SessionId,
+                    Role = "Manager",
+                };
 
-            return Ok();
-        }
+                return Ok(loginResponse);
+            }
+            else
+            {
+                var employeeSession = _authService.LoginEmployee(loginRequestDto);
 
-        [HttpPost("login/manager")]
-        public IActionResult LoginManager( [FromBody] LoginDto loginDto )
-        {
-            var managerSession = _authService.LoginManager(loginDto);
+                if ( employeeSession == null ) return BadRequest();
 
-            if ( managerSession == null ) return BadRequest();
+                var loginResponse = new LoginResponseDto()
+                {
+                    SessionId = employeeSession.SessionId,
+                    Role = "Employee",
+                };
 
-            Response.Cookies.Append("sessionId", managerSession.SessionId, _cookieOptions);
-
-            return Ok();
+                return Ok(loginResponse);
+            }
         }
 
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            var sessionId = Request.Cookies["sessionId"];
-
-            if ( sessionId == null ) return BadRequest();
+            var sessionId = Request.Headers[ "X-Auth-Token" ].ToString();
 
             var isSuccess = _authService.Logout(sessionId);
 

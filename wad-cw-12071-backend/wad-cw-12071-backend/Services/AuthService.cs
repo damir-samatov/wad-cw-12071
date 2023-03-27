@@ -41,7 +41,7 @@ namespace wad_cw_12071_backend.Services
             return ( isEmployeeLogedOut || isManagerLogedOut );
         }
 
-        public EmployeeSession? LoginEmployee( LoginDto loginDto )
+        public EmployeeSession? LoginEmployee( LoginRequestDto loginDto )
         {
             var employee = _authRepository.GetEmployeeByLogin(loginDto.Login);
 
@@ -63,7 +63,7 @@ namespace wad_cw_12071_backend.Services
             return employeeSession;
         }
 
-        public ManagerSession? LoginManager( LoginDto loginDto )
+        public ManagerSession? LoginManager( LoginRequestDto loginDto )
         {
             var manager = _authRepository.GetManagerByLogin(loginDto.Login);
 

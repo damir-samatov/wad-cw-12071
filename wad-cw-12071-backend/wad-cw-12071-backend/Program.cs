@@ -27,7 +27,26 @@ builder.Services.AddTransient<ManagerRepository, ManagerRepository>();
 
 builder.Services.AddTransient<TicketRepository, TicketRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+    });
+});
+
 WebApplication app = builder.Build();
+
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin();
+    options.AllowAnyHeader();
+    options.AllowAnyMethod();
+});
+
+app.UseAuthorization();
 
 app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/employee"),
     middleware => middleware.UseMiddleware<EmployeeAuthMiddleware>());
