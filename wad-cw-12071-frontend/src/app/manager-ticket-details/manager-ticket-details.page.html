@@ -4,17 +4,19 @@
   <div *ngIf="!isEditing">
     <app-ticket-details
       [ticket]="ticket"
-      (editClick)="onEditClick()"
-      (deleteClick)="onDeleteClick($event)"
+      [assignedEmployee]="assignedEmployee"
+      (editClick)="onEditOpen()"
+      (deleteClick)="onDelete($event)"
       role="manager"
     >
     </app-ticket-details>
   </div>
   <div *ngIf="isEditing">
     <app-ticket-edit
-      (cancelClick)="onCancelClick()"
-      (saveClick)="onSaveClick($event)"
       [ticket]="ticket"
+      [employees]="employees"
+      (cancelClick)="onCancelEdit()"
+      (saveClick)="onSaveEdit($event)"
     >
     </app-ticket-edit>
   </div>

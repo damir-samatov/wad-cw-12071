@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   getUserSession,
-  resetUserSession,
   getTicket,
   deleteTicket,
   updateTicket,
-} from '../../utils';
-import { ITicket, ITicketUpdate } from '../../interfaces';
+  getEmployees,
+} from '../../requests';
+import { IEmployee, ITicket, ITicketUpdate } from '../../interfaces';
+import { resetUserSession } from '../../utils';
 
 @Component({
   selector: 'app-manager-ticket-details-page',
@@ -19,10 +20,21 @@ export class ManagerTicketDetailsPage {
   isLoading = true;
   isEditing = false;
   ticket: ITicket;
+  employees: IEmployee[];
+  assignedEmployee: IEmployee;
 
   async ngOnInit() {
     if (!this.userSession.hasSession) return await this.redirectToLogin();
-    return await this.fetchTicket();
+
+    await Promise.all([this.fetchTicket(), this.fetchEmployees()]);
+
+    this.assignedEmployee = this.employees.find(
+      (employee) => employee.id === this.ticket.employeeId
+    )!;
+
+    this.isLoading = false;
+
+    return;
   }
 
   async fetchTicket() {
@@ -35,18 +47,25 @@ export class ManagerTicketDetailsPage {
     } catch (e) {
       await this.redirectToLogin();
     }
-    this.isLoading = false;
   }
 
-  onEditClick() {
+  async fetchEmployees() {
+    try {
+      this.employees = await getEmployees(this.userSession.sessionId);
+    } catch (e) {
+      await this.redirectToLogin();
+    }
+  }
+
+  onEditOpen() {
     this.isEditing = true;
   }
 
-  onCancelClick() {
+  onCancelEdit() {
     this.isEditing = false;
   }
 
-  async onDeleteClick(id: number) {
+  async onDelete(id: number) {
     const isSuccess = await deleteTicket(this.userSession.sessionId, id);
     if (isSuccess) {
       await this.redirectToTickets();
@@ -55,7 +74,7 @@ export class ManagerTicketDetailsPage {
     }
   }
 
-  async onSaveClick(updatedTicket: ITicketUpdate) {
+  async onSaveEdit(updatedTicket: ITicketUpdate) {
     const isSuccess = await updateTicket(
       updatedTicket,
       this.userSession.sessionId

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getManager, getUserSession, resetUserSession } from '../../utils';
-import { IManagerResponse } from '../../interfaces';
+import { resetUserSession } from '../../utils';
+import { getManager, getUserSession } from '../../requests';
+import { IManager } from '../../interfaces';
 
 @Component({
   selector: 'app-manager',
@@ -12,7 +13,7 @@ export class ManagerPage {
 
   public isLoading = true;
 
-  public manager: IManagerResponse;
+  public manager: IManager;
 
   private async redirectToLogin() {
     resetUserSession();

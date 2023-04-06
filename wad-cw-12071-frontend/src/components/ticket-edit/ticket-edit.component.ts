@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITicket, ITicketUpdate } from '../../interfaces';
+import { IEmployee, ITicket, ITicketUpdate } from '../../interfaces';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -7,9 +7,9 @@ import { ITicket, ITicketUpdate } from '../../interfaces';
 })
 export class TicketEditComponent {
   @Input() ticket: ITicket;
+  @Input() employees: IEmployee[];
   @Output() saveClick = new EventEmitter<ITicketUpdate>();
-  @Output() cancelClick = new EventEmitter<number>();
-
+  @Output() cancelClick = new EventEmitter();
   updatedTicket: ITicketUpdate;
 
   ngOnInit() {

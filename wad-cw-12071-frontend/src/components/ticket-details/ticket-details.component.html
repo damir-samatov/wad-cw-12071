@@ -8,6 +8,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ ticket.title }}</h5>
       <p class="card-text">{{ ticket.description }}</p>
+      <p class="card-text"><strong>Assignee: </strong>{{ assignedEmployee.firstName }} {{ assignedEmployee.lastName }}</p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><strong>Priority:</strong> {{ ticket.priority }}</li>
         <li class="list-group-item"><strong>Status:</strong> {{ ticket.status }}</li>

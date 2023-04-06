@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  deleteTicket,
+  createTicket,
+  getEmployees,
   getTickets,
   getUserSession,
-  resetUserSession,
-} from '../../utils';
-import { ITicket } from '../../interfaces';
+} from '../../requests';
+import { IEmployee, ITicket, ITicketCreate } from '../../interfaces';
+import { resetUserSession } from '../../utils';
 
 @Component({
   selector: 'app-manager-tickets-page',
@@ -16,24 +17,58 @@ export class ManagerTicketsPage {
   constructor(private route: ActivatedRoute, private router: Router) {}
   private userSession = getUserSession();
   isLoading = true;
-  tickets: ITicket[] = [];
+  isCreating: boolean = false;
+  tickets: ITicket[];
+  employees: IEmployee[];
 
   async ngOnInit() {
+    return await this.fetchAll();
+  }
+
+  async fetchAll() {
+    this.isLoading = true;
     if (!this.userSession.hasSession) return await this.redirectToLogin();
-    return await this.fetchTickets();
+    try {
+      await Promise.all([this.fetchTickets(), this.fetchEmployees()]);
+      this.isLoading = false;
+    } catch {
+      await this.redirectToLogin();
+    }
+  }
+
+  async onCreate(newTicket: ITicketCreate) {
+    this.isLoading = true;
+    try {
+      const isSuccess = await createTicket(
+        newTicket,
+        this.userSession.sessionId
+      );
+      if (!isSuccess) await this.redirectToLogin();
+      await this.fetchAll();
+    } catch {
+      await this.redirectToLogin();
+    }
+    this.isCreating = false;
+  }
+
+  async fetchTickets() {
+    this.tickets = await getTickets(this.userSession.sessionId, true);
+  }
+
+  async fetchEmployees() {
+    this.employees = await getEmployees(this.userSession.sessionId);
+  }
+
+  onOpenCreate() {
+    this.isCreating = true;
+  }
+
+  onCancelCreate() {
+    this.isCreating = false;
   }
 
   private async redirectToLogin() {
     resetUserSession();
-    return await this.router.navigateByUrl('/login');
-  }
-
-  async fetchTickets() {
-    try {
-      this.tickets = await getTickets(this.userSession.sessionId, true);
-    } catch {
-      await this.redirectToLogin();
-    }
-    this.isLoading = false;
+    await this.router.navigateByUrl('/login');
   }
 }

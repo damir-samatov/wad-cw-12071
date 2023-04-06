@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { loginUser } from '../../utils';
-import { ILoginDto } from '../../interfaces';
+import { loginUser } from '../../requests';
+import { ILogin } from '../../interfaces';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ export class LoginPage {
   constructor(private route: ActivatedRoute, private router: Router) {}
   isLoading: boolean = false;
   hasError: boolean = false;
-  loginDto: ILoginDto = {
+  loginDto: ILogin = {
     login: '',
     password: '',
     isManager: false,
