@@ -1,0 +1,26 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="!isEditing">
+    <app-ticket-details
+      [ticket]="ticket"
+      (editClick)="onEditClick()"
+      (deleteClick)="onDeleteClick($event)"
+      role="manager"
+    >
+    </app-ticket-details>
+  </div>
+  <div *ngIf="isEditing">
+    <app-ticket-edit
+      (cancelClick)="onCancelClick()"
+      (saveClick)="onSaveClick($event)"
+      [ticket]="ticket"
+    >
+    </app-ticket-edit>
+  </div>
+</div>
+
+
+
+
+

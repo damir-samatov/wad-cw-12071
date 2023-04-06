@@ -7,15 +7,24 @@ import { ManagerPage } from './manager/manager.page';
 import { LoginPage } from './login/login.page';
 import { LoaderComponent } from '../components/loader/loader.component';
 import { TicketsComponent } from '../components/tickets/tickets.component';
+import { TicketDetailsComponent } from '../components/ticket-details/ticket-details.component';
+import { ManagerTicketsPage } from './manager-tickets/manager-tickets.page';
+import { ManagerTicketDetailsPage } from './manager-ticket-details/manager-ticket-details.page';
+import { TicketEditComponent } from '../components/ticket-edit/ticket-edit.component';
 
 @NgModule({
   imports: [FormsModule, AppRoutingModule, BrowserModule],
   declarations: [
     AppComponent,
     LoaderComponent,
+    TicketsComponent,
+    TicketDetailsComponent,
+    TicketEditComponent,
+
     LoginPage,
     ManagerPage,
-    TicketsComponent,
+    ManagerTicketsPage,
+    ManagerTicketDetailsPage,
   ],
   bootstrap: [AppComponent],
   providers: [],

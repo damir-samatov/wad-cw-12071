@@ -20,13 +20,16 @@ export class LoginPage {
   async onSubmit() {
     this.isLoading = true;
 
-    const isLoginSuccess = await loginUser(this.loginDto);
-
-    if (isLoginSuccess) {
-      await this.router.navigateByUrl(
-        this.loginDto.isManager ? '/manager' : '/employee'
-      );
-    } else {
+    try {
+      const isLoginSuccess = await loginUser(this.loginDto);
+      if (isLoginSuccess) {
+        await this.router.navigateByUrl(
+          this.loginDto.isManager ? '/manager' : '/employee'
+        );
+      } else {
+        this.hasError = true;
+      }
+    } catch {
       this.hasError = true;
     }
 

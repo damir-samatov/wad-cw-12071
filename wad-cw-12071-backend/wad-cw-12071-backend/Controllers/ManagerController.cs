@@ -9,17 +9,33 @@ namespace wad_cw_12071_backend.Controllers
     [ApiController]
     public class ManagerController : ControllerBase
     {
+        private readonly ManagerRepository _managerRepository;
         private readonly TicketRepository _ticketRepository;
-
         private readonly EmployeeRepository _employeeRepository;
 
         public ManagerController(
+                ManagerRepository managerRepository,
                 TicketRepository ticketRepository,
                 EmployeeRepository employeeRepository
             )
         {
+            _managerRepository = managerRepository;
             _ticketRepository = ticketRepository;
             _employeeRepository = employeeRepository;
+        }
+
+        [HttpGet]
+        public IActionResult GetSelf()
+        {
+            var managerId = GetManagerId();
+
+            var manager = _managerRepository.GetOne(managerId);
+
+            if ( manager == null ) return BadRequest();
+
+            ManagerResponseDto managerResponseDto = ManagerResponseDto.MapFromManager(manager);
+
+            return Ok(managerResponseDto);
         }
 
         [HttpGet("tickets")]
@@ -111,6 +127,11 @@ namespace wad_cw_12071_backend.Controllers
             var employeeResponseDto = EmployeeResponseDto.MapFromEmployee(employee);
 
             return Ok(employeeResponseDto);
+        }
+
+        private int GetManagerId()
+        {
+            return ( int )HttpContext.Items[ "ManagerId" ]!;
         }
     }
 }

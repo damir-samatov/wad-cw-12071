@@ -17,9 +17,9 @@ builder.Services.AddScoped<EmployeeAuthMiddleware>();
 
 builder.Services.AddScoped<ManagerAuthMiddleware>();
 
-builder.Services.AddTransient<AuthRepository, AuthRepository>();
-
 builder.Services.AddTransient<AuthService, AuthService>();
+
+builder.Services.AddTransient<AuthRepository, AuthRepository>();
 
 builder.Services.AddTransient<EmployeeRepository, EmployeeRepository>();
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getUserSession, resetUserSession } from '../../utils';
-import { API_URL } from '../../constants';
+import { getManager, getUserSession, resetUserSession } from '../../utils';
 import { IManagerResponse } from '../../interfaces';
 
 @Component({
@@ -13,9 +12,7 @@ export class ManagerPage {
 
   public isLoading = true;
 
-  public managerResponseDto: IManagerResponse = {
-    id: 0,
-  };
+  public manager: IManagerResponse;
 
   private async redirectToLogin() {
     resetUserSession();
@@ -27,18 +24,8 @@ export class ManagerPage {
 
     if (!userSession.hasSession) await this.redirectToLogin();
 
-    const headers = new Headers([
-      ['Content-Type', 'application/json'],
-      ['X-Auth-Token', `${userSession.sessionId}`],
-    ]);
-
     try {
-      const res = await fetch(`${API_URL}/manager`, {
-        method: 'GET',
-        headers,
-      });
-      if (res.status !== 200) await this.redirectToLogin();
-      this.managerResponseDto = await res.json();
+      this.manager = await getManager(userSession.sessionId);
     } catch {
       await this.redirectToLogin();
     }

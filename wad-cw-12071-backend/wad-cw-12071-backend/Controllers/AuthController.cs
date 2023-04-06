@@ -38,7 +38,7 @@ namespace wad_cw_12071_backend.Controllers
                 var loginResponse = new LoginResponseDto()
                 {
                     SessionId = managerSession.SessionId,
-                    Role = "Manager",
+                    Role = "manager",
                 };
 
                 return Ok(loginResponse);
@@ -52,7 +52,7 @@ namespace wad_cw_12071_backend.Controllers
                 var loginResponse = new LoginResponseDto()
                 {
                     SessionId = employeeSession.SessionId,
-                    Role = "Employee",
+                    Role = "employee",
                 };
 
                 return Ok(loginResponse);

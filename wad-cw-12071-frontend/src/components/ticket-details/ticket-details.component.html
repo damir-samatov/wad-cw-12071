@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Ticket Details</h1>
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      Ticket #{{ ticket.id }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ ticket.title }}</h5>
+      <p class="card-text">{{ ticket.description }}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Priority:</strong> {{ ticket.priority }}</li>
+        <li class="list-group-item"><strong>Status:</strong> {{ ticket.status }}</li>
+      </ul>
+    </div>
+  </div>
+  <button (click)="onEditClick()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+    Edit Ticket
+  </button>
+  <button (click)="onDeleteClick()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+    Delete Ticket
+  </button>
+</div>

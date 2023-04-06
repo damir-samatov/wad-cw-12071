@@ -1,0 +1,4 @@
+<app-loader *ngIf="isLoading; else showPage"></app-loader>
+<ng-template #showPage>
+  <app-tickets [tickets]="tickets" role="manager"></app-tickets>
+</ng-template>

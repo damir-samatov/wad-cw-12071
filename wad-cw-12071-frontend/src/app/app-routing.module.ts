@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPage } from './login/login.page';
 import { ManagerPage } from './manager/manager.page';
-import { TicketsComponent } from '../components/tickets/tickets.component';
+import { ManagerTicketsPage } from './manager-tickets/manager-tickets.page';
+import { ManagerTicketDetailsPage } from './manager-ticket-details/manager-ticket-details.page';
 
 const routes: Routes = [
   { path: 'login', component: LoginPage },
   { path: 'manager', component: ManagerPage },
-  { path: 'manager/tickets', component: TicketsComponent },
+  { path: 'manager/tickets', component: ManagerTicketsPage },
+  { path: 'manager/tickets/:id', component: ManagerTicketDetailsPage },
 ];
 
 @NgModule({
