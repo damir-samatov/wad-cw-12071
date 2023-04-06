@@ -2,20 +2,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { ManagerPage } from './manager/manager.page';
+import { LoginPage } from './login/login.page';
+import { LoaderComponent } from '../components/loader/loader.component';
+import { TicketsComponent } from '../components/tickets/tickets.component';
 
 @NgModule({
-  imports: [
-    FormsModule,
-    AppRoutingModule,
-    BrowserModule,
-  ],
+  imports: [FormsModule, AppRoutingModule, BrowserModule],
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoaderComponent,
+    LoginPage,
+    ManagerPage,
+    TicketsComponent,
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [],
 })
-export class AppModule { }
+export class AppModule {}

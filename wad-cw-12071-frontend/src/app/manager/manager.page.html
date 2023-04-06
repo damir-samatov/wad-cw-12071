@@ -1,0 +1,8 @@
+<app-loader *ngIf="isLoading; else showPage"></app-loader>
+<ng-template #showPage>
+  <div class="container">
+    {{managerResponseDto.id}}
+    <a routerLink="/manager/tickets">Tickets</a>
+    <a routerLink="/manager/employees">Employees</a>
+  </div>
+</ng-template>
