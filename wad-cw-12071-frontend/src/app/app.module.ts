@@ -18,6 +18,7 @@ import { EmployeePage } from './employee/employee.page';
 import { EmployeeTicketsPage } from './employee-tickets/employee-tickets.page';
 import { EmployeeTicketDetailsComponent } from '../components/employee-ticket-details/employee-ticket-details.component';
 import { EmployeeTicketDetailsPage } from './employee-ticket-details/employee-ticket-details.page';
+import { ManagerEmployeesPage } from './manager-employees/manager-employees.page';
 
 @NgModule({
   imports: [FormsModule, AppRoutingModule, BrowserModule],
@@ -29,6 +30,7 @@ import { EmployeeTicketDetailsPage } from './employee-ticket-details/employee-ti
     EmployeeTicketDetailsComponent,
     TicketEditComponent,
     TicketCreateComponent,
+    ManagerEmployeesPage,
 
     RootPage,
     LoginPage,

@@ -5,9 +5,9 @@
       <thead class="bg-primary text-white">
       <tr>
         <th>ID</th>
-        <th>Priority</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Priority</th>
         <th>Status</th>
         <th></th>
       </tr>
@@ -15,9 +15,9 @@
       <tbody>
       <tr *ngFor="let ticket of tickets">
         <td>{{ticket.id}}</td>
-        <td>{{ticket.priority}}</td>
         <td>{{ticket.title}}</td>
         <td>{{ticket.description}}</td>
+        <td>{{ticket.priority}}</td>
         <td style="white-space: nowrap;">{{ticket.status}}</td>
         <td>
           <a class="px-3" routerLink="/{{role}}/tickets/{{ticket.id}}">View</a>

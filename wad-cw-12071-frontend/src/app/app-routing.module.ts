@@ -9,6 +9,7 @@ import { RegisterPage } from './register/register.page';
 import { EmployeePage } from './employee/employee.page';
 import { EmployeeTicketsPage } from './employee-tickets/employee-tickets.page';
 import { EmployeeTicketDetailsPage } from './employee-ticket-details/employee-ticket-details.page';
+import { ManagerEmployeesPage } from './manager-employees/manager-employees.page';
 
 const routes: Routes = [
   { path: '', component: RootPage },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'employee/tickets/:id', component: EmployeeTicketDetailsPage },
 
   { path: 'manager', component: ManagerPage },
+  { path: 'manager/employees', component: ManagerEmployeesPage },
   { path: 'manager/tickets', component: ManagerTicketsPage },
   { path: 'manager/tickets/:id', component: ManagerTicketDetailsPage },
 ];
