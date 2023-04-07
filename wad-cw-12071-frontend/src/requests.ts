@@ -132,6 +132,24 @@ export const getEmployees = async (sessionId: string): Promise<IEmployee[]> => {
   return await res.json();
 };
 
+export const updateTicketStatus = async (
+  ticketId: number,
+  newStatus: string,
+  sessionId: string
+) => {
+  const headers = authRequestHeaders(sessionId);
+
+  const res = await fetch(`${API_URL}/employee/tickets/${ticketId}`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({
+      status: newStatus,
+    }),
+  });
+
+  return res.status === 200;
+};
+
 export const createTicket = async (
   newTicket: ITicketCreate,
   sessionId: string

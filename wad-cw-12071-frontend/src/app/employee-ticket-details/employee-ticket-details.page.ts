@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getUserSession, getTicket } from '../../requests';
-import { IEmployee, ITicket } from '../../interfaces';
+import { getUserSession, getTicket, updateTicketStatus } from '../../requests';
+import { ITicket } from '../../interfaces';
 import { resetUserSession } from '../../utils';
 
 @Component({
@@ -12,7 +12,6 @@ export class EmployeeTicketDetailsPage {
   constructor(private route: ActivatedRoute, private router: Router) {}
   private userSession = getUserSession();
   isLoading = true;
-  isEditing = false;
   ticket: ITicket;
 
   async ngOnInit() {
@@ -37,20 +36,24 @@ export class EmployeeTicketDetailsPage {
     }
   }
 
-  onEditOpen() {
-    this.isEditing = true;
-  }
-
-  onCancelEdit() {
-    this.isEditing = false;
+  async onUpdateStatus(newStatus: string) {
+    this.isLoading = true;
+    try {
+      const isSuccess = await updateTicketStatus(
+        this.ticket.id,
+        newStatus,
+        this.userSession.sessionId
+      );
+      if (isSuccess) await this.fetchTicket();
+      else await this.redirectToLogin();
+    } catch (e) {
+      await this.redirectToLogin();
+    }
+    this.isLoading = false;
   }
 
   private async redirectToLogin() {
     resetUserSession();
     return await this.router.navigateByUrl('/login');
-  }
-
-  private async redirectToTickets() {
-    return await this.router.navigateByUrl('/manager/tickets');
   }
 }

@@ -3,12 +3,10 @@
 <div *ngIf="!isLoading">
   <app-employee-ticket-details
     [ticket]="ticket"
-    (editClick)="onEditOpen()"
+    (onUpdateStatusEvent)="onUpdateStatus($event)"
   >
   </app-employee-ticket-details>
 </div>
-
-
 
 
 

@@ -8,10 +8,16 @@ import { IEmployee, ITicket } from '../../interfaces';
 export class EmployeeTicketDetailsComponent {
   @Input() ticket: ITicket;
   @Input() assignedEmployee: IEmployee;
-  @Output() editClick = new EventEmitter();
+  @Output() onUpdateStatusEvent = new EventEmitter();
 
-  onUpdateStatusClick = () => {
-    this.editClick.emit();
+  newStatus: string;
+
+  ngOnInit() {
+    this.newStatus = this.ticket.status;
+  }
+
+  onUpdateStatus = () => {
+    this.onUpdateStatusEvent.emit(this.newStatus);
   };
 
   @Input() role: 'manager' | 'employee';
