@@ -12,12 +12,22 @@ export class TicketEditComponent {
   @Output() cancelClick = new EventEmitter();
   updatedTicket: ITicketUpdate;
 
+  hasValidationError: boolean = false;
+
   ngOnInit() {
     this.updatedTicket = structuredClone(this.ticket);
   }
 
   onSaveClick() {
+    if (
+      this.updatedTicket.title.trim() === '' ||
+      this.updatedTicket.description.trim() === ''
+    ) {
+      this.hasValidationError = true;
+      return;
+    }
     this.saveClick.emit(this.updatedTicket);
+    this.hasValidationError = false;
   }
 
   onCancelClick() {

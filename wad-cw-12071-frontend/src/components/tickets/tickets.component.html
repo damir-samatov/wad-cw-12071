@@ -1,33 +1,29 @@
-<div class="container">
-  <h1 class="ms-auto">Tickets</h1>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Priority</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Employee ID</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let ticket of tickets">
-      <td>{{ticket.id}}</td>
-      <td>{{ticket.priority}}</td>
-      <td>{{ticket.title}}</td>
-      <td>{{ticket.description}}</td>
-      <td>{{ticket.status}}</td>
-      <td>{{ticket.employeeId}}</td>
-      <td class="d-flex justify-content-end gap-2">
-        <a class="btn btn-lg btn-primary p-2"
-           routerLink="/{{role}}/tickets/{{ticket.id}}"
-        >
-          View
-        </a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div style="max-width: 1200px;" class="px-3 mx-auto">
+  <h1 class="my-5 text-center">Tickets</h1>
+  <div class="table-responsive">
+    <table class="p-3 table table-striped table-hover">
+      <thead class="bg-primary text-white">
+      <tr>
+        <th>ID</th>
+        <th>Priority</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ticket of tickets">
+        <td>{{ticket.id}}</td>
+        <td>{{ticket.priority}}</td>
+        <td>{{ticket.title}}</td>
+        <td>{{ticket.description}}</td>
+        <td style="white-space: nowrap;">{{ticket.status}}</td>
+        <td>
+          <a class="px-3" routerLink="/{{role}}/tickets/{{ticket.id}}">View</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

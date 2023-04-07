@@ -1,5 +1,5 @@
-<div class="container">
-  <h1>Ticket Details</h1>
+<div style="max-width: 600px;" class="px-3 mx-auto">
+  <h1 class="my-5 text-center">Ticket Details</h1>
   <hr>
   <div class="card">
     <div class="card-header">
@@ -15,10 +15,12 @@
       </ul>
     </div>
   </div>
-  <button (click)="onEditClick()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
-    Edit Ticket
-  </button>
-  <button (click)="onDeleteClick()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
-    Delete Ticket
-  </button>
+  <div class="d-flex gap-3 my-4">
+    <button (click)="onEditClick()" type="button" class="btn btn-primary btn-lg">
+      Edit Ticket
+    </button>
+    <button (click)="onDeleteClick()" type="button" class="btn btn-danger btn-lg">
+      Delete Ticket
+    </button>
+  </div>
 </div>
