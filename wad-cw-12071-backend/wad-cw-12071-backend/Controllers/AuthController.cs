@@ -21,7 +21,7 @@ namespace wad_cw_12071_backend.Controllers
         {
             var isSuccess = _authService.RegisterEmployee(employee);
 
-            if ( isSuccess ) return Created("/api/auth/register/employee", employee);
+            if ( isSuccess ) return Ok(employee);
 
             return BadRequest("Login is taken");
         }

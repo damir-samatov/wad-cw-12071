@@ -13,6 +13,7 @@ import { ManagerTicketDetailsPage } from './manager-ticket-details/manager-ticke
 import { TicketEditComponent } from '../components/ticket-edit/ticket-edit.component';
 import { TicketCreateComponent } from '../components/ticket-create/ticket-create.component';
 import { RootPage } from './root/root.page';
+import { RegisterPage } from './register/register.page';
 
 @NgModule({
   imports: [FormsModule, AppRoutingModule, BrowserModule],
@@ -26,6 +27,7 @@ import { RootPage } from './root/root.page';
 
     RootPage,
     LoginPage,
+    RegisterPage,
     ManagerPage,
     ManagerTicketsPage,
     ManagerTicketDetailsPage,

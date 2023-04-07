@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card mt-5">
+        <div class="card-header">
+          <h1 class="text-center">Register Employee</h1>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+            <div class="form-group mb-3">
+              <label for="login">Login:</label>
+              <input autocomplete="off" type="text" class="form-control" id="login" name="login" [(ngModel)]="employee.login" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password:</label>
+              <input autocomplete="off" type="password" class="form-control" id="password" name="password" [(ngModel)]="employee.password" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="firstName">First Name:</label>
+              <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="employee.firstName" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="lastName">Last Name:</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="employee.lastName" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="jobTitle">Job Title:</label>
+              <input type="text" class="form-control" id="jobTitle" name="jobTitle" [(ngModel)]="employee.jobTitle" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="bio">Bio:</label>
+              <textarea class="form-control" id="bio" name="bio" [(ngModel)]="employee.bio" required></textarea>
+            </div>
+            <button [disabled]="isLoading" (click)="onSubmit()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+              {{ isLoading ? "Loading..." : "Submit" }}
+            </button>
+            <div *ngFor="let errorMessage of errorMessages" class="invalid-feedback d-block my-2">
+              * {{ errorMessage }}
+            </div>
+            <a routerLink="/login">Login</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

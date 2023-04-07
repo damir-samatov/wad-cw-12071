@@ -7,9 +7,15 @@ import {
   IUserSession,
   IEmployee,
   ITicketCreate,
+  IEmployeeCreate,
 } from './interfaces';
 import { API_URL } from './constants';
-import { requestHeaders, resetUserSession, setUserSession } from './utils';
+import {
+  authRequestHeaders,
+  requestHeaders,
+  resetUserSession,
+  setUserSession,
+} from './utils';
 
 export const getUserSession = (): IUserSession => {
   const sessionId = localStorage.getItem('sessionId');
@@ -49,7 +55,7 @@ export const loginUser = async (loginDto: ILogin): Promise<boolean> => {
 };
 
 export const getManager = async (sessionId: string): Promise<IManager> => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(`${API_URL}/manager`, {
     method: 'GET',
@@ -66,7 +72,7 @@ export const getTicket = async (
   ticketId: number,
   isManager: boolean
 ): Promise<ITicket> => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(
     `${API_URL}/${isManager ? 'manager' : 'employee'}/tickets/${ticketId}`,
@@ -85,7 +91,7 @@ export const getTickets = async (
   sessionId: string,
   isManager: boolean
 ): Promise<ITicket[]> => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(
     `${API_URL}/${isManager ? 'manager' : 'employee'}/tickets`,
@@ -101,7 +107,7 @@ export const getTickets = async (
 };
 
 export const getEmployees = async (sessionId: string): Promise<IEmployee[]> => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(`${API_URL}/manager/employees`, {
     method: 'GET',
@@ -117,7 +123,7 @@ export const createTicket = async (
   newTicket: ITicketCreate,
   sessionId: string
 ) => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(`${API_URL}/manager/tickets`, {
     method: 'POST',
@@ -128,8 +134,18 @@ export const createTicket = async (
   return res.status === 200;
 };
 
+export const registerEmployee = async (newEmployee: IEmployeeCreate) => {
+  const res = await fetch(`${API_URL}/auth/register/employee`, {
+    method: 'POST',
+    headers: requestHeaders,
+    body: JSON.stringify(newEmployee),
+  });
+
+  return res.status === 200;
+};
+
 export const deleteTicket = async (sessionId: string, ticketId: number) => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(`${API_URL}/manager/tickets/${ticketId}`, {
     method: 'DELETE',
@@ -143,7 +159,7 @@ export const updateTicket = async (
   updatedTicket: ITicketUpdate,
   sessionId: string
 ) => {
-  const headers = requestHeaders(sessionId);
+  const headers = authRequestHeaders(sessionId);
 
   const res = await fetch(`${API_URL}/manager/tickets`, {
     method: 'PUT',

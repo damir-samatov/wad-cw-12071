@@ -21,12 +21,13 @@
                 Is Manager
               </label>
             </div>
-            <div *ngIf="hasError" class="invalid-feedback d-block mb-3">
-              * Wrong login or password
-            </div>
             <button [disabled]="isLoading" (click)="onSubmit()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
               {{ isLoading ? "Loading..." : "Submit" }}
             </button>
+            <div *ngIf="hasError" class="invalid-feedback d-block my-2">
+              * Wrong login or password
+            </div>
+            <a routerLink="/register">Register As Employee</a>
           </form>
         </div>
       </div>

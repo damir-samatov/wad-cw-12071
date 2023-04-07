@@ -5,10 +5,12 @@ import { ManagerPage } from './manager/manager.page';
 import { ManagerTicketsPage } from './manager-tickets/manager-tickets.page';
 import { ManagerTicketDetailsPage } from './manager-ticket-details/manager-ticket-details.page';
 import { RootPage } from './root/root.page';
+import { RegisterPage } from './register/register.page';
 
 const routes: Routes = [
   { path: '', component: RootPage },
   { path: 'login', component: LoginPage },
+  { path: 'register', component: RegisterPage },
   { path: 'manager', component: ManagerPage },
   { path: 'manager/tickets', component: ManagerTicketsPage },
   { path: 'manager/tickets/:id', component: ManagerTicketDetailsPage },
