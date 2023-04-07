@@ -10,10 +10,9 @@ import { IEmployee } from '../../interfaces';
 })
 export class EmployeePage {
   constructor(private route: ActivatedRoute, private router: Router) {}
-
-  public isLoading = true;
-
-  public employee: IEmployee;
+  isLoading = true;
+  employee: IEmployee;
+  userSession = getUserSession();
 
   private async redirectToLogin() {
     resetUserSession();
@@ -21,12 +20,10 @@ export class EmployeePage {
   }
 
   async ngOnInit() {
-    const userSession = getUserSession();
-
-    if (!userSession.hasSession) await this.redirectToLogin();
+    if (!this.userSession.hasSession) await this.redirectToLogin();
 
     try {
-      this.employee = await getEmployee(userSession.sessionId);
+      this.employee = await getEmployee(this.userSession.sessionId);
     } catch {
       await this.redirectToLogin();
     }

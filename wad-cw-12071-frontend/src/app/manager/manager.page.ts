@@ -11,9 +11,9 @@ import { IManager } from '../../interfaces';
 export class ManagerPage {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
-  public isLoading = true;
+  isLoading = true;
 
-  public manager: IManager;
+  manager: IManager;
 
   private async redirectToLogin() {
     resetUserSession();

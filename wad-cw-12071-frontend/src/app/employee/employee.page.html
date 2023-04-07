@@ -1,7 +1,23 @@
 <app-loader *ngIf="isLoading; else showPage"></app-loader>
 <ng-template #showPage>
-  <div class="container">
-    {{employee.id}}
-    <a routerLink="/employee/tickets">Tickets</a>
+  <div style="max-width: 600px;" class="px-3 mx-auto">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="my-4">Employee: {{employee.firstName}} {{employee.lastName}}</h1>
+
+        <h2 class="mb-3">Personal Data</h2>
+        <p>Login: {{employee.login}}</p>
+        <p>First Name: {{employee.firstName}}</p>
+        <p>Last Name: {{employee.lastName}}</p>
+        <p>Job Title: {{employee.jobTitle}}</p>
+        <p>Bio: {{employee.bio}}</p>
+
+        <h5 class="mb-3">Employee's capabilities:</h5>
+        <p>View all the assigned tickets</p>
+        <p>Update ticket's status</p>
+        <p>View their personal data</p>
+        <p>View their personal data</p>
+      </div>
+    </div>
   </div>
 </ng-template>

@@ -1,8 +1,16 @@
 <app-loader *ngIf="isLoading; else showPage"></app-loader>
 <ng-template #showPage>
-  <div class="container">
-    {{manager.id}}
-    <a routerLink="/manager/tickets">Tickets</a>
-    <a routerLink="/manager/employees">Employees</a>
+  <div style="max-width: 600px;" class="px-3 mx-auto">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="my-4">Manager</h1>
+        <h5 class="mb-3">Manager's capabilities:</h5>
+        <p>Create and assign tickets to employees</p>
+        <p>View all Tickets</p>
+        <p>View all Employees</p>
+        <p>Edit Tickets</p>
+        <p>Delete Tickets</p>
+      </div>
+    </div>
   </div>
 </ng-template>
