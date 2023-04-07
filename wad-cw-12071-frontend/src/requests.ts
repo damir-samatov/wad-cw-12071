@@ -67,6 +67,19 @@ export const getManager = async (sessionId: string): Promise<IManager> => {
   return await res.json();
 };
 
+export const getEmployee = async (sessionId: string): Promise<IEmployee> => {
+  const headers = authRequestHeaders(sessionId);
+
+  const res = await fetch(`${API_URL}/employee`, {
+    method: 'GET',
+    headers,
+  });
+
+  if (res.status !== 200) throw new Error('Error while fetching employee');
+
+  return await res.json();
+};
+
 export const getTicket = async (
   sessionId: string,
   ticketId: number,

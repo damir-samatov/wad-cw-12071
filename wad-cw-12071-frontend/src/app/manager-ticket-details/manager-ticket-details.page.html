@@ -2,14 +2,13 @@
 
 <div *ngIf="!isLoading">
   <div *ngIf="!isEditing">
-    <app-ticket-details
+    <app-manager-ticket-details
       [ticket]="ticket"
       [assignedEmployee]="assignedEmployee"
       (editClick)="onEditOpen()"
       (deleteClick)="onDelete($event)"
-      role="manager"
     >
-    </app-ticket-details>
+    </app-manager-ticket-details>
   </div>
   <div *ngIf="isEditing">
     <app-ticket-edit

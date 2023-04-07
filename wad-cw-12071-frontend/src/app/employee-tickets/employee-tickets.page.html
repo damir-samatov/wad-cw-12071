@@ -1,0 +1,5 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="!isLoading">
+  <app-tickets [tickets]="tickets" role="employee"></app-tickets>
+</div>

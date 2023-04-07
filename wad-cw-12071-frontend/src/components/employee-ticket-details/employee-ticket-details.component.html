@@ -1,0 +1,23 @@
+<div style="max-width: 600px;" class="px-3 mx-auto">
+  <h1 class="my-5 text-center">Ticket Details</h1>
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      Ticket #{{ ticket.id }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ ticket.title }}</h5>
+      <p class="card-text">{{ ticket.description }}</p>
+      <p class="card-text"><strong>Assignee: </strong>{{ assignedEmployee.firstName }} {{ assignedEmployee.lastName }}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Priority:</strong> {{ ticket.priority }}</li>
+        <li class="list-group-item"><strong>Status:</strong> {{ ticket.status }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d-flex gap-3 my-4">
+    <button (click)="onUpdateStatusClick()" type="button" class="btn btn-primary btn-lg">
+      Update Status
+    </button>
+  </div>
+</div>

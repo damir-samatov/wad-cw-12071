@@ -1,0 +1,14 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="!isLoading">
+  <app-employee-ticket-details
+    [ticket]="ticket"
+    (editClick)="onEditOpen()"
+  >
+  </app-employee-ticket-details>
+</div>
+
+
+
+
+
