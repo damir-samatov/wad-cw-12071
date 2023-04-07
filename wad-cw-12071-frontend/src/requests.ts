@@ -8,6 +8,7 @@ import {
   IEmployee,
   ITicketCreate,
   IEmployeeCreate,
+  IEmployeeUpdate,
 } from './interfaces';
 import { API_URL } from './constants';
 import {
@@ -181,6 +182,34 @@ export const registerEmployee = async (newEmployee: IEmployeeCreate) => {
     method: 'POST',
     headers: requestHeaders,
     body: JSON.stringify(newEmployee),
+  });
+
+  return res.status === 200;
+};
+
+export const updateEmployee = async (
+  updateEmployee: IEmployeeUpdate,
+  sessionId: string
+): Promise<IEmployee> => {
+  const headers = authRequestHeaders(sessionId);
+  const res = await fetch(`${API_URL}/employee`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(updateEmployee),
+  });
+
+  return await res.json();
+};
+
+export const updatePassword = async (
+  newPassword: string,
+  sessionId: string
+) => {
+  const headers = authRequestHeaders(sessionId);
+  const res = await fetch(`${API_URL}/employee/password`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ password: newPassword }),
   });
 
   return res.status === 200;

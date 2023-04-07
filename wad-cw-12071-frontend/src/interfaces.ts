@@ -45,6 +45,8 @@ export interface IEmployee {
   bio: string;
 }
 
+export interface IEmployeeUpdate extends IEmployee {}
+
 export interface IManager {
   id: number;
 }

@@ -5,7 +5,7 @@
       <label for="employeeId" class="form-label">Assignee:</label>
       <select id="employeeId" name="employeeId" [(ngModel)]="newTicket.employeeId" class="form-select form-control-lg" required>
         <option *ngFor="let employee of employees" [value]="employee.id">
-          {{employee.firstName}} {{employee.lastName}}
+          {{employee.login}} {{employee.firstName}} {{employee.lastName}}
         </option>
       </select>
     </div>

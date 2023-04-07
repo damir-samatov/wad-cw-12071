@@ -1,23 +1,83 @@
-<app-loader *ngIf="isLoading; else showPage"></app-loader>
-<ng-template #showPage>
-  <div style="max-width: 600px;" class="px-3 mx-auto">
+<app-loader *ngIf="isLoading"></app-loader>
+<div *ngIf="!isLoading">
+  <div *ngIf="!isEditing" style="max-width: 600px;" class="px-3 mx-auto">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="my-4">Employee: {{employee.firstName}} {{employee.lastName}}</h1>
+        <h1 class="my-4">{{newEmployee.firstName}} {{newEmployee.lastName}}</h1>
 
         <h2 class="mb-3">Personal Data</h2>
-        <p>Login: {{employee.login}}</p>
-        <p>First Name: {{employee.firstName}}</p>
-        <p>Last Name: {{employee.lastName}}</p>
-        <p>Job Title: {{employee.jobTitle}}</p>
-        <p>Bio: {{employee.bio}}</p>
+        <p>Login: {{newEmployee.login}}</p>
+        <p>First Name: {{newEmployee.firstName}}</p>
+        <p>Last Name: {{newEmployee.lastName}}</p>
+        <p>Job Title: {{newEmployee.jobTitle}}</p>
+        <p>Bio: {{newEmployee.bio}}</p>
 
         <h5 class="mb-3">Employee's capabilities:</h5>
         <p>View all the assigned tickets</p>
         <p>Update ticket's status</p>
         <p>View their personal data</p>
         <p>View their personal data</p>
+        <button (click)="openEdit()" type="button" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+          Edit
+        </button>
       </div>
     </div>
   </div>
-</ng-template>
+
+  <div *ngIf="isEditing">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card mt-5">
+          <div class="card-header">
+            <h1 class="text-center">Edit My Personal Data</h1>
+          </div>
+          <div class="card-body">
+            <form #newEmployeeForm="ngForm">
+              <div class="form-group mb-3">
+                <label for="login">Login:</label>
+                <input autocomplete="off" type="text" class="form-control" id="login" name="login" [(ngModel)]="newEmployee.login" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="newEmployee.firstName" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newEmployee.lastName" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="jobTitle">Job Title:</label>
+                <input type="text" class="form-control" id="jobTitle" name="jobTitle" [(ngModel)]="newEmployee.jobTitle" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="bio">Bio:</label>
+                <textarea class="form-control" id="bio" name="bio" [(ngModel)]="newEmployee.bio" required></textarea>
+              </div>
+              <button type="button" (click)="onSubmitPersonalData()" [disabled]="isLoadingPersonalData" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+                {{ isLoadingPersonalData ? "Loading..." : "Submit" }}
+              </button>
+              <div *ngFor="let errorMessage of errorPersonalDataMessages" class="invalid-feedback d-block my-2">
+                * {{ errorMessage }}
+              </div>
+            </form>
+            <form #newEmployeePasswordForm="ngForm">
+              <div class="form-group mb-3">
+                <label for="password">New Password:</label>
+                <input autocomplete="off" type="text" class="form-control" id="password" name="password" [(ngModel)]="newPassword" required>
+              </div>
+              <button type="button" (click)="onSubmitPassword()" [disabled]="isLoadingPassword" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+                {{ isLoadingPassword ? "Loading..." : "Change Password" }}
+              </button>
+              <div *ngFor="let errorMessage of errorPasswordMessages" class="invalid-feedback d-block my-2">
+                * {{ errorMessage }}
+              </div>
+            </form>
+            <button (click)="closeEdit()" class="btn btn-lg btn-primary btn-block px-5 py-2 d-block ms-auto">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
