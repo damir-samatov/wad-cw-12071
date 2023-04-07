@@ -54,6 +54,17 @@ export const loginUser = async (loginDto: ILogin): Promise<boolean> => {
   return true;
 };
 
+export const logoutUser = async (): Promise<boolean> => {
+  const headers = new Headers([['Content-Type', 'application/json']]);
+
+  const res = await fetch(`${API_URL}/auth/logout`, {
+    method: 'POST',
+    headers,
+  });
+
+  return res.status !== 200;
+};
+
 export const getManager = async (sessionId: string): Promise<IManager> => {
   const headers = authRequestHeaders(sessionId);
 

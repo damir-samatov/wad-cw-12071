@@ -5,7 +5,7 @@ import { resetUserSession } from '../../utils';
 
 @Component({
   selector: 'app-root',
-  templateUrl: '../app.component.html',
+  templateUrl: './root.page.html',
 })
 export class RootPage {
   constructor(private route: ActivatedRoute, private router: Router) {}

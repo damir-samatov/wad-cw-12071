@@ -1,0 +1,16 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="!isCreating">
+    <app-tickets [tickets]="tickets" role="manager"></app-tickets>
+  </div>
+  <div *ngIf="isCreating">
+    <app-ticket-create
+      [employees]="employees"
+      (saveClick)="onCreate($event)"
+      (cancelClick)="onCancelCreate()"
+    >
+    </app-ticket-create>
+  </div>
+  <button *ngIf="!isCreating" (click)="onOpenCreate()" type="button" class="d-block w-auto mx-auto btn btn-primary btn-lg">Create Ticket</button>
+</div>
